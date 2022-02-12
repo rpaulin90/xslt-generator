@@ -40,7 +40,7 @@ export default function Home() {
   }
 
   function handleSeparator(event) {
-    setSeparator(event.target.value[0] == undefined || event.target.value[0] == '&quot;' ? '' : event.target.value[0])
+    setSeparator(event.target.value[0] == undefined || event.target.value[0] == '"' ? '' : event.target.value[0])
   }
 
   function handleSubmit(e) {
@@ -311,7 +311,7 @@ export default function Home() {
             <button style={{}} onClick={() => copy(result)}>Copy to clipboard</button>
 
           </div>
-          <pre
+          {/* <pre
             style={{
               border: '1px dashed green', padding: '5px',
               overflowX: 'auto',
@@ -320,15 +320,18 @@ export default function Home() {
 
               wordWrap: 'break-word'
             }}
-          >{result}</pre>
+          >{result}</pre> */}
+
+          <div style={{ minWidth: '80%' }}>
+            <textarea style={{ backgroundColor: 'black', color: 'green', border: '1px dashed green', padding: '5px', width: '100%', minHeight: '500px' }} readOnly value={result} />
+          </div>
+
         </div>
 
       }
 
 
-      {/* <div style={{ minWidth: '80%' }}>
-        <textarea style={{ width: '100%', minHeight: '500px' }} readOnly value={result} />
-      </div> */}
+
 
 
 
