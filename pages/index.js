@@ -96,7 +96,6 @@ export default function Home() {
 
 
       setResult(format(`
-      <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet exclude-result-prefixes="xsl" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     version="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
     xmlns:wd="urn:com.workday.report/YOUR_REPORT_NAME_HERE"
