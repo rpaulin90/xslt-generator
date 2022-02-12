@@ -52,11 +52,12 @@ export default function Home() {
     var xmlBody = ''
 
     if (type == 'DT') {
-      stringArray.filter(x => x != '').forEach(element => xml = xml + `<${element} ${file == 'fixed' ? 'xtt:fixedLength="10"' : ''}><xsl:text>${element.replaceAll('_', ' ')}</xsl:text></${element}>`);
+      stringArray.filter(x => x != '').forEach(element => xml = xml + `<${element} ${file == 'fixed' ? 'xtt:fixedLength="10"' : ''}><xsl:value-of select="'${element.replaceAll('_', ' ')}'"/></${element}>`);
       stringArray.filter(x => x != '').forEach(element => xmlBody = xmlBody + `<${element} ${file == 'fixed' ? 'xtt:fixedLength="10"' : ''}><xsl:value-of select=""/></${element}>`);
 
 
       setResult(format(`
+      <?xml version="1.0" encoding="UTF-8"?>
   <xsl:stylesheet version="2.0"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -89,13 +90,14 @@ export default function Home() {
   </xsl:stylesheet>`));
     } else {
 
-      stringArray.filter(x => x != '').forEach((element, idx, array) => xml = xml + `<${element}>${file == 'fixed' ? `<xsl:value-of select="substring(concat('${element.replaceAll('_', ' ')}',$spaces),1,10)"/>` : `<xsl:text>${element.replaceAll('_', ' ')}</xsl:text>`}</${element}>${idx === array.length - 1 ? '' : '<xsl:value-of select="$separator"/>'}`);
+      stringArray.filter(x => x != '').forEach((element, idx, array) => xml = xml + `<${element}>${file == 'fixed' ? `<xsl:value-of select="substring(concat('${element.replaceAll('_', ' ')}',$spaces),1,10)"/>` : `<xsl:value-of select="'${element.replaceAll('_', ' ')}'"/>`}</${element}>${idx === array.length - 1 ? '' : '<xsl:value-of select="$separator"/>'}`);
 
       // xml = file == 'separator' ? stringArray.filter(x => x != '').join(separator) : stringArray.filter(x => x != '').join()
       stringArray.filter(x => x != '').forEach((element, idx, array) => xmlBody = xmlBody + `<${element}>${file == 'fixed' ? '<xsl:value-of select="substring(concat(wd:field,$spaces),1,10)"/>' : '<xsl:value-of select=""/>'}</${element}>${idx === array.length - 1 ? '' : '<xsl:value-of select="$separator"/>'}`);
 
 
       setResult(format(`
+      <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet exclude-result-prefixes="xsl" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     version="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
     xmlns:wd="urn:com.workday.report/YOUR_REPORT_NAME_HERE"
