@@ -164,8 +164,8 @@ export default function Home() {
     <div className={styles.container}>
       <Head>
         <title>XSLT Starter File Generator</title>
-        <meta name="description" content="XSLT Boilerplate Generator" />
-        <link rel="icon" href="/favicon.ico" />
+        <meta name='description' content='XSLT Generator' />
+        <link rel='icon' href='/favicon.ico' />
       </Head>
 
 
@@ -189,7 +189,7 @@ export default function Home() {
         <form onSubmit={handleSubmit}>
           <textarea style={{ minHeight: '100px' }} value={text} onChange={handleChange} />
           <div>
-            <input style={{ cursor: 'pointer' }} type="submit" value="Generate XSLT" />
+            <input style={{ cursor: 'pointer' }} type='submit' value='Generate XSLT' />
           </div>
         </form>
 
@@ -202,15 +202,15 @@ export default function Home() {
           <div >
             <h4>Type of Transformation</h4>
             <form>
-              <div className="radio">
+              <div className='radio'>
                 <label>
-                  <input type="radio" value="DT" checked={type == 'DT'} onChange={handleTypeChange} />
+                  <input type='radio' value='DT' checked={type == 'DT'} onChange={handleTypeChange} />
             Document Transformation
           </label>
               </div>
-              <div className="radio">
+              <div className='radio'>
                 <label>
-                  <input type="radio" value="EIB" checked={type == 'EIB'} onChange={handleTypeChange} />
+                  <input type='radio' value='EIB' checked={type == 'EIB'} onChange={handleTypeChange} />
             EIB (no xtt or etv)
           </label>
               </div>
@@ -221,15 +221,15 @@ export default function Home() {
           <div >
             <h4>Include Header</h4>
             <form>
-              <div className="radio">
+              <div className='radio'>
                 <label>
-                  <input type="radio" value="header" checked={header == 'header'} onChange={handleHeaderChange} />
+                  <input type='radio' value='header' checked={header == 'header'} onChange={handleHeaderChange} />
             Yes
           </label>
               </div>
-              <div className="radio">
+              <div className='radio'>
                 <label>
-                  <input type="radio" value="no-header" checked={header == 'no-header'} onChange={handleHeaderChange} />
+                  <input type='radio' value='no-header' checked={header == 'no-header'} onChange={handleHeaderChange} />
             No
           </label>
               </div>
@@ -240,9 +240,9 @@ export default function Home() {
           <div >
             <h4>Type of File</h4>
             <form>
-              <div className="radio">
+              <div className='radio'>
                 <label>
-                  <input type="radio" value="separator" checked={file == 'separator'} onChange={handleFileChange} />
+                  <input type='radio' value='separator' checked={file == 'separator'} onChange={handleFileChange} />
             Separator
           </label>
 
@@ -250,12 +250,12 @@ export default function Home() {
                   width: '20px',
                   textAlign: 'center',
                   marginLeft: '10px'
-                }} type="text" value={separator} onChange={handleSeparator} disabled={file == 'fixed' ? true : ''} />
+                }} type='text' value={separator} onChange={handleSeparator} disabled={file == 'fixed' ? true : ''} />
 
               </div>
-              <div className="radio">
+              <div className='radio'>
                 <label>
-                  <input type="radio" value="fixed" checked={file == 'fixed'} onChange={handleFileChange} />
+                  <input type='radio' value='fixed' checked={file == 'fixed'} onChange={handleFileChange} />
             Fixed Length
           </label>
               </div>
@@ -270,15 +270,15 @@ export default function Home() {
           <div style={{ marginBottom: '20px' }}>
             <h4>Template</h4>
             <form>
-              <div className="radio">
+              <div className='radio'>
                 <label>
-                  <input type="radio" value="ccw" checked={template == 'ccw'} onChange={handleTemplateChange} />
+                  <input type='radio' value='ccw' checked={template == 'ccw'} onChange={handleTemplateChange} />
           Core Connector Worker
         </label>
               </div>
-              <div className="radio">
+              <div className='radio'>
                 <label>
-                  <input type="radio" value="bc" checked={template == 'bc'} onChange={handleTemplateChange} />
+                  <input type='radio' value='bc' checked={template == 'bc'} onChange={handleTemplateChange} />
           Benefits Connector
         </label>
               </div>
@@ -286,10 +286,10 @@ export default function Home() {
             </form>
             <button style={{ marginTop: '20px' }}>
               <a
-                href="/etv_xtt.pdf"
-                alt="alt text"
-                target="_blank"
-                rel="noopener noreferrer"
+                href='/etv_xtt.pdf'
+                alt='alt text'
+                target='_blank'
+                rel='noopener noreferrer'
               >etv and xtt specifications (pdf)</a>
             </button>
 
