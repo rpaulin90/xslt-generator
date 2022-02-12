@@ -129,10 +129,7 @@ export default function Home() {
 
           `<!-- HEADER -->
         <Header>
-        ${file == 'separator' ?
-            `<xsl:text>${xml}</xsl:text>`
-            : xml
-          }
+        ${xml}
         </Header>  
         
        
