@@ -56,8 +56,8 @@ export default function Home() {
       stringArray.filter(x => x != '').forEach(element => xmlBody = xmlBody + `<${element} ${file == 'fixed' ? 'xtt:fixedLength="10"' : ''}><xsl:value-of select=""/></${element}>`);
 
 
-      setResult((`
-  <xsl:stylesheet version="2.0"
+      setResult(format(`
+  <xsl:stylesheet version="2.0&"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" ${template == 'ccw' ? 'xmlns:ws="urn:com.workday/workersync"' : 'xmlns:bc="urn:com.workday/bc"'}
