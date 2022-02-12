@@ -56,7 +56,7 @@ export default function Home() {
       stringArray.filter(x => x != '').forEach(element => xmlBody = xmlBody + `<${element} ${file == 'fixed' ? 'xtt:fixedLength="10"' : ''}><xsl:value-of select=""/></${element}>`);
 
 
-      setResult(format(`
+      setResult((`
   <xsl:stylesheet version="2.0"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -311,7 +311,7 @@ export default function Home() {
             <button style={{}} onClick={() => copy(result)}>Copy to clipboard</button>
 
           </div>
-          {/* <pre
+          <pre
             style={{
               border: '1px dashed green', padding: '5px',
               overflowX: 'auto',
@@ -320,11 +320,11 @@ export default function Home() {
 
               wordWrap: 'break-word'
             }}
-          >{result}</pre> */}
+          >{result}</pre>
 
-          <div style={{ minWidth: '80%' }}>
-            <textarea style={{ backgroundColor: 'black', color: 'green', border: '1px dashed green', padding: '5px', width: '100%', minHeight: '500px' }} readOnly value={result} />
-          </div>
+          {/* <div style={{ minWidth: '80%' }}>
+            <textarea style={{backgroundColor:'black',color: 'green',border: '1px dashed green', padding: '5px', width: '100%', minHeight: '500px' }} readOnly value={result} />
+          </div> */}
 
         </div>
 
