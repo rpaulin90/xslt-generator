@@ -40,7 +40,7 @@ export default function Home() {
   }
 
   function handleSeparator(event) {
-    setSeparator(event.target.value[0] == undefined || event.target.value[0] == '"' ? '' : event.target.value[0])
+    setSeparator(event.target.value[0] == undefined || event.target.value[0] == '&quot;' ? '' : event.target.value[0])
   }
 
   function handleSubmit(e) {
