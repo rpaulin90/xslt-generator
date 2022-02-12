@@ -93,7 +93,7 @@ export default function Home() {
       stringArray.filter(x => x != '').forEach((element, idx, array) => xml = xml + `<${element}>${file == 'fixed' ? `<xsl:value-of select="substring(concat('${element.replaceAll('_', ' ')}',$spaces),1,10)"/>` : `<xsl:value-of select="'${element.replaceAll('_', ' ')}'"/>`}</${element}>${idx === array.length - 1 ? '' : '<xsl:value-of select="$separator"/>'}`);
 
       // xml = file == 'separator' ? stringArray.filter(x => x != '').join(separator) : stringArray.filter(x => x != '').join()
-      stringArray.filter(x => x != '').forEach((element, idx, array) => xmlBody = xmlBody + `<${element}>${file == 'fixed' ? '<xsl:value-of select="substring(concat(wd:field,$spaces),1,10)"/>' : '<xsl:value-of select=""/>'}</${element}>${idx === array.length - 1 ? '' : '<xsl:value-of select="$separator"/>'}`);
+      stringArray.filter(x => x != '').forEach((element, idx, array) => xmlBody = xmlBody + `<${element}>${file == 'fixed' ? '<xsl:value-of select="substring(concat(wd:field,$spaces),1,10)"/>' : '<xsl:value-of select=""/>'}</${element}>${idx === array.length - 1 || file == 'fixed' ? '' : '<xsl:value-of select="$separator"/>'}`);
 
 
       setResult(format(`
