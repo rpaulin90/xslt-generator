@@ -164,9 +164,9 @@ export default function Home() {
   }
   var buttonStyle;
   if (focus) {
-    buttonStyle = { cursor: 'pointer', border: '1px', padding: '10px', backgroundColor: '#166534', borderRadius: '6px', width: '50%', margin: '50px 0', color: 'white' }
+    buttonStyle = { cursor: 'pointer', border: '1px', padding: '10px', backgroundColor: '#166534', borderRadius: '6px', width: '50%', margin: '50px 0', color: 'white', maxWidth: '250px' }
   } else {
-    buttonStyle = { cursor: 'pointer', border: '1px', padding: '10px', backgroundColor: '#22c55e', borderRadius: '6px', width: '50%', margin: '50px 0', color: 'white' }
+    buttonStyle = { cursor: 'pointer', border: '1px', padding: '10px', backgroundColor: '#22c55e', borderRadius: '6px', width: '50%', margin: '50px 0', color: 'white', maxWidth: '250px' }
   }
 
   return (
@@ -191,7 +191,8 @@ export default function Home() {
           color: 'white',
           padding: '5px',
           border: '1px solid',
-          marginBottom: '5px'
+          marginBottom: '5px',
+          minWidth: '250px', maxWidth: '500px'
         }}>
           <p style={{ margin: 0 }}>Enter your headers as a list. This generator will create a field for each line. You can enter words separated by a space and the program will join them with a "_" for XML nodes.</p>
         </div>
