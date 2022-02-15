@@ -17,6 +17,7 @@ export default function Home() {
   const [header, setHeader] = useState('header');
   const [file, setFile] = useState('separator');
   const [separator, setSeparator] = useState(',');
+  const [focus, setFocus] = useState(false);
 
   function handleChange(event) {
     setText(event.target.value)
@@ -37,6 +38,11 @@ export default function Home() {
   function handleFileChange(event) {
 
     setFile(event.target.value)
+  }
+
+  function handleFocus() {
+
+    setFocus(!focus);
   }
 
   function handleSeparator(event) {
@@ -70,7 +76,7 @@ export default function Home() {
         
         ${header == 'header' ?
           `<!-- HEADER -->
-        <Header ${file == separator ? `xtt:separator="${separator}"` : ''}>
+        <Header ${file == 'separator' ? `xtt:separator="${separator}"` : ''}>
           ${xml}
         </Header>`
           :
@@ -156,7 +162,12 @@ export default function Home() {
       `));
     }
   }
-
+  var buttonStyle;
+  if (focus) {
+    buttonStyle = { cursor: 'pointer', border: '1px', padding: '10px', backgroundColor: '#166534', borderRadius: '6px', width: '50%', margin: '50px 0', color: 'white' }
+  } else {
+    buttonStyle = { cursor: 'pointer', border: '1px', padding: '10px', backgroundColor: '#22c55e', borderRadius: '6px', width: '50%', margin: '50px 0', color: 'white' }
+  }
 
   return (
     <div className={styles.container}>
@@ -184,12 +195,10 @@ export default function Home() {
         }}>
           <p style={{ margin: 0 }}>Enter your headers as a list. This generator will create a field for each line. You can enter words separated by a space and the program will join them with a "_" for XML nodes.</p>
         </div>
-        <form onSubmit={handleSubmit}>
-          <textarea style={{ minHeight: '100px' }} value={text} onChange={handleChange} />
-          <div>
-            <input style={{ cursor: 'pointer' }} type='submit' value='Generate XSLT' />
-          </div>
-        </form>
+
+        <textarea style={{ minHeight: '100px' }} value={text} onChange={handleChange} />
+
+
 
         <div style={{
           display: 'flex',
@@ -282,22 +291,32 @@ export default function Home() {
               </div>
 
             </form>
-            <button style={{ marginTop: '20px' }}>
+
+            <div style={{ marginTop: '10px' }}>
               <a
+                style={{ borderBottom: '1px solid' }}
                 href='/etv_xtt.pdf'
                 alt='alt text'
                 target='_blank'
                 rel='noopener noreferrer'
-              >etv and xtt specifications (pdf)</a>
-            </button>
+              >{`--> etv and xtt specifications (pdf) <--`}</a>
+            </div>
+
+
+
 
           </div>
           :
           ''
         }
 
-
+        <button style={buttonStyle} onClick={handleSubmit} onMouseDown={handleFocus} onMouseUp={handleFocus}>
+          Generate XSLT
+        </button>
       </div>
+
+      <hr style={{ marginBottom: '50px' }} />
+
       {result == '' ? '' :
 
         <div style={{ marginBottom: '10px' }}>

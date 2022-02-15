@@ -108,6 +108,14 @@
   margin-left: 0.5rem;
 }
 
+.btn {
+  background-color: '#22c55e'
+}
+
+/* .btn:hover {
+background-color: 'blue';
+} */
+
 @media (max-width: 600px) {
   .grid {
     width: 100%;
