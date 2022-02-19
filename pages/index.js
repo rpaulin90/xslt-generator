@@ -58,8 +58,8 @@ export default function Home() {
     var xmlBody = ''
 
     if (type == 'DT') {
-      stringArray.filter(x => x != '').forEach(element => xml = xml + `<${element} ${file == 'fixed' ? 'xtt:fixedLength="10"' : ''}><xsl:value-of select="'${element.replaceAll('_', ' ')}'"/></${element}>`);
-      stringArray.filter(x => x != '').forEach(element => xmlBody = xmlBody + `<${element} ${file == 'fixed' ? 'xtt:fixedLength="10"' : ''}><xsl:value-of select=""/></${element}>`);
+      stringArray.filter(x => x != '').forEach(element => xml = xml + `<${element.replaceAll('/', '_')} ${file == 'fixed' ? 'xtt:fixedLength="10"' : ''}><xsl:value-of select="'${element.replaceAll('_', ' ')}'"/></${element.replaceAll('/', '_')}>`);
+      stringArray.filter(x => x != '').forEach(element => xmlBody = xmlBody + `<${element.replaceAll('/', '_')} ${file == 'fixed' ? 'xtt:fixedLength="10"' : ''}><xsl:value-of select=""/></${element.replaceAll('/', '_')}>`);
 
 
       setResult(format(`
@@ -96,10 +96,10 @@ export default function Home() {
   </xsl:stylesheet>`));
     } else {
 
-      stringArray.filter(x => x != '').forEach((element, idx, array) => xml = xml + `<${element}>${file == 'fixed' ? `<xsl:value-of select="substring(concat('${element.replaceAll('_', ' ')}',$spaces),1,10)"/>` : `<xsl:value-of select="'${element.replaceAll('_', ' ')}'"/>`}</${element}>${idx === array.length - 1 || file == 'fixed' ? '' : '<xsl:value-of select="$separator"/>'}`);
+      stringArray.filter(x => x != '').forEach((element, idx, array) => xml = xml + `<${element.replaceAll('/', '_')}>${file == 'fixed' ? `<xsl:value-of select="substring(concat('${element.replaceAll('_', ' ')}',$spaces),1,10)"/>` : `<xsl:value-of select="'${element.replaceAll('_', ' ')}'"/>`}</${element.replaceAll('/', '_')}>${idx === array.length - 1 || file == 'fixed' ? '' : '<xsl:value-of select="$separator"/>'}`);
 
       // xml = file == 'separator' ? stringArray.filter(x => x != '').join(separator) : stringArray.filter(x => x != '').join()
-      stringArray.filter(x => x != '').forEach((element, idx, array) => xmlBody = xmlBody + `<${element}>${file == 'fixed' ? '<xsl:value-of select="substring(concat(wd:field,$spaces),1,10)"/>' : '<xsl:value-of select=""/>'}</${element}>${idx === array.length - 1 || file == 'fixed' ? '' : '<xsl:value-of select="$separator"/>'}`);
+      stringArray.filter(x => x != '').forEach((element, idx, array) => xmlBody = xmlBody + `<${element.replaceAll('/', '_')}>${file == 'fixed' ? '<xsl:value-of select="substring(concat(wd:field,$spaces),1,10)"/>' : '<xsl:value-of select=""/>'}</${element.replaceAll('/', '_')}>${idx === array.length - 1 || file == 'fixed' ? '' : '<xsl:value-of select="$separator"/>'}`);
 
 
       setResult(format(`
@@ -117,6 +117,8 @@ export default function Home() {
 
     ${file == 'fixed' ?
           `<!-- filler of 100 spaces -->
+    <xsl:variable name="spaces" select="'                                                                                                    '"/>
+    
     <!-- Use the following to have a right or left justified fixed width file:
     
     Left justified: <xsl:value-of select="substring(concat(wd:field,$spaces),1,10)"/>
@@ -124,8 +126,7 @@ export default function Home() {
     Right justified: <xsl:value-of select="concat(substring($spaces,1,10 - string-length(wd:field)),wd:field)"/>
 
     -->
-    <xsl:variable name="spaces"
-        select="'                                                                                                    '"/>`
+    `
           : ''}
 
 
@@ -300,7 +301,7 @@ export default function Home() {
                 alt='alt text'
                 target='_blank'
                 rel='noopener noreferrer'
-              >{`--> etv and xtt specifications (pdf) <--`}</a>
+              >{`--> ETV and XTT docs (pdf) <--`}</a>
             </div>
 
 
