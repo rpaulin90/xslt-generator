@@ -53,14 +53,14 @@ export default function Home() {
   function handleSubmit(e) {
     e.preventDefault();
     
-    var stringArray = text.replace(/["/#']/g,'_').split('\n');
+    var stringArray = text.replace(/["']/g,'_').split('\n');
     console.log(stringArray)
     var xml = ''
     var xmlBody = ''
 
     if (type == 'DT') {
-      stringArray.filter(x => x != '').forEach(element => xml = xml + `<${element.replace(/[\s]/g,'_')} ${file == 'fixed' ? 'xtt:fixedLength="10"' : ''}><xsl:value-of select="'${element}'"/></${element.replace(/[\s]/g,'_')}>`);
-      stringArray.filter(x => x != '').forEach(element => xmlBody = xmlBody + `<${element.replace(/[\s]/g,'_')} ${file == 'fixed' ? 'xtt:fixedLength="10"' : ''}><xsl:value-of select=""/></${element.replace(/[\s]/g,'_')}>`);
+      stringArray.filter(x => x != '').forEach(element => xml = xml + `<${element.replace(/[\s"/#'$%^&*()]/g,'_')} ${file == 'fixed' ? 'xtt:fixedLength="10"' : ''}><xsl:value-of select="'${element}'"/></${element.replace(/[\s"/#'$%^&*()]/g,'_')}>`);
+      stringArray.filter(x => x != '').forEach(element => xmlBody = xmlBody + `<${element.replace(/[\s"/#'$%^&*()]/g,'_')} ${file == 'fixed' ? 'xtt:fixedLength="10"' : ''}><xsl:value-of select=""/></${element.replace(/[\s"/#'$%^&*()]/g,'_')}>`);
 
 
       setResult(format(`
@@ -97,10 +97,10 @@ export default function Home() {
   </xsl:stylesheet>`));
     } else {
 
-      stringArray.filter(x => x != '').forEach((element, idx, array) => xml = xml + `<${element.replace(/[\s]/g,'_')}>${file == 'fixed' ? `<xsl:value-of select="substring(concat('${element}',$spaces),1,10)"/>` : `<xsl:value-of select="'${element}'"/>`}</${element.replace(/[\s]/g,'_')}>${idx === array.length - 1 || file == 'fixed' ? '' : '<xsl:value-of select="$separator"/>'}`);
+      stringArray.filter(x => x != '').forEach((element, idx, array) => xml = xml + `<${element.replace(/[\s"/#'$%^&*()]/g,'_')}>${file == 'fixed' ? `<xsl:value-of select="substring(concat('${element}',$spaces),1,10)"/>` : `<xsl:value-of select="'${element}'"/>`}</${element.replace(/[\s"/#'$%^&*()]/g,'_')}>${idx === array.length - 1 || file == 'fixed' ? '' : '<xsl:value-of select="$separator"/>'}`);
 
       // xml = file == 'separator' ? stringArray.filter(x => x != '').join(separator) : stringArray.filter(x => x != '').join()
-      stringArray.filter(x => x != '').forEach((element, idx, array) => xmlBody = xmlBody + `<${element.replace(/[\s]/g,'_')}>${file == 'fixed' ? '<xsl:value-of select="substring(concat(wd:field,$spaces),1,10)"/>' : '<xsl:value-of select=""/>'}</${element.replace(/[\s]/g,'_')}>${idx === array.length - 1 || file == 'fixed' ? '' : '<xsl:value-of select="$separator"/>'}`);
+      stringArray.filter(x => x != '').forEach((element, idx, array) => xmlBody = xmlBody + `<${element.replace(/[\s"/#'$%^&*()]/g,'_')}>${file == 'fixed' ? '<xsl:value-of select="substring(concat(wd:field,$spaces),1,10)"/>' : '<xsl:value-of select=""/>'}</${element.replace(/[\s"/#'$%^&*()]/g,'_')}>${idx === array.length - 1 || file == 'fixed' ? '' : '<xsl:value-of select="$separator"/>'}`);
 
 
       setResult(format(`
