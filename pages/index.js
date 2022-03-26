@@ -59,8 +59,8 @@ export default function Home() {
     var xmlBody = ''
 
     if (type == 'DT') {
-      stringArray.filter(x => x != '').forEach(element => xml = xml + `<${element.replace(/[\s"/#'$%^&*()]/g,'_')} ${file == 'fixed' ? 'xtt:fixedLength="10"' : ''}><xsl:value-of select="'${element}'"/></${element.replace(/[\s"/#'$%^&*()]/g,'_')}>`);
-      stringArray.filter(x => x != '').forEach(element => xmlBody = xmlBody + `<${element.replace(/[\s"/#'$%^&*()]/g,'_')} ${file == 'fixed' ? 'xtt:fixedLength="10"' : ''}><xsl:value-of select=""/></${element.replace(/[\s"/#'$%^&*()]/g,'_')}>`);
+      stringArray.filter(x => x != '').forEach(element => xml = xml + `<${element.replace(/[^a-zA-Z0-9]/g,'_')} ${file == 'fixed' ? 'xtt:fixedLength="10"' : ''}><xsl:value-of select="'${element}'"/></${element.replace(/[^a-zA-Z0-9]/g,'_')}>`);
+      stringArray.filter(x => x != '').forEach(element => xmlBody = xmlBody + `<${element.replace(/[^a-zA-Z0-9]/g,'_')} ${file == 'fixed' ? 'xtt:fixedLength="10"' : ''}><xsl:value-of select=""/></${element.replace(/[^a-zA-Z0-9]/g,'_')}>`);
 
 
       setResult(format(`
@@ -97,10 +97,10 @@ export default function Home() {
   </xsl:stylesheet>`));
     } else {
 
-      stringArray.filter(x => x != '').forEach((element, idx, array) => xml = xml + `<${element.replace(/[\s"/#'$%^&*()]/g,'_')}>${file == 'fixed' ? `<xsl:value-of select="substring(concat('${element}',$spaces),1,10)"/>` : `<xsl:value-of select="'${element}'"/>`}</${element.replace(/[\s"/#'$%^&*()]/g,'_')}>${idx === array.length - 1 || file == 'fixed' ? '' : '<xsl:value-of select="$separator"/>'}`);
+      stringArray.filter(x => x != '').forEach((element, idx, array) => xml = xml + `<${element.replace(/[^a-zA-Z0-9]/g,'_')}>${file == 'fixed' ? `<xsl:value-of select="substring(concat('${element}',$spaces),1,10)"/>` : `<xsl:value-of select="'${element}'"/>`}</${element.replace(/[^a-zA-Z0-9]/g,'_')}>${idx === array.length - 1 || file == 'fixed' ? '' : '<xsl:value-of select="$separator"/>'}`);
 
       // xml = file == 'separator' ? stringArray.filter(x => x != '').join(separator) : stringArray.filter(x => x != '').join()
-      stringArray.filter(x => x != '').forEach((element, idx, array) => xmlBody = xmlBody + `<${element.replace(/[\s"/#'$%^&*()]/g,'_')}>${file == 'fixed' ? '<xsl:value-of select="substring(concat(wd:field,$spaces),1,10)"/>' : '<xsl:value-of select=""/>'}</${element.replace(/[\s"/#'$%^&*()]/g,'_')}>${idx === array.length - 1 || file == 'fixed' ? '' : '<xsl:value-of select="$separator"/>'}`);
+      stringArray.filter(x => x != '').forEach((element, idx, array) => xmlBody = xmlBody + `<${element.replace(/[^a-zA-Z0-9]/g,'_')}>${file == 'fixed' ? '<xsl:value-of select="substring(concat(wd:field,$spaces),1,10)"/>' : '<xsl:value-of select=""/>'}</${element.replace(/[^a-zA-Z0-9]/g,'_')}>${idx === array.length - 1 || file == 'fixed' ? '' : '<xsl:value-of select="$separator"/>'}`);
 
 
       setResult(format(`
@@ -196,7 +196,7 @@ export default function Home() {
           marginBottom: '5px',
           minWidth: '250px', maxWidth: '500px'
         }}>
-          <p style={{ margin: 0 }}>Enter your headers as a list. This generator will create a field for each line. You can enter words separated by a space and the program will join them with a "_" for XML nodes.</p>
+          <p style={{ margin: 0 }}>Enter your headers as a list. This generator will create a field for each line. You can enter words separated by a space and the program will join them with a "_" for XML nodes. All non-alphanumeric characters except for single and double quotes will be replaced by underscores for XML nodes but will be left the same for header titles. Single and double quotes will be replaced by underscores for both, XML nodes and header titles.</p>
         </div>
 
         <textarea style={{ minHeight: '100px' }} value={text} onChange={handleChange} />
