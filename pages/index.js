@@ -54,7 +54,7 @@ export default function Home() {
     e.preventDefault();
     
     var stringArray = text.replace(/["']/g,'_').split('\n');
-    console.log(stringArray)
+    
     var xml = ''
     var xmlBody = ''
 
