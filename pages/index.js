@@ -298,11 +298,11 @@ export default function Home() {
             <div style={{ marginTop: '10px' }}>
               <a
                 style={{ borderBottom: '1px solid' }}
-                href='/etv_xtt.pdf'
+                href='https://rpaulin.notion.site/Element-Transformation-Validation-ETV-XTT-c1a29619a836415ca6624c9043ce883e'
                 alt='alt text'
                 target='_blank'
                 rel='noopener noreferrer'
-              >{`--> ETV and XTT docs (pdf) <--`}</a>
+              >{`--> ETV and XTT docs <--`}</a>
             </div>
 
 
