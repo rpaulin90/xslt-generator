@@ -325,7 +325,7 @@ export default function Home() {
                     checked={type == "DT"}
                     onChange={handleTypeChange}
                   />
-                  Document Transformation
+                  Connector + Document Transformation
                 </label>
               </div>
               <div className="radio">
@@ -336,7 +336,7 @@ export default function Home() {
                     checked={type == "EIB"}
                     onChange={handleTypeChange}
                   />
-                  EIB (no xtt or etv)
+                  Custom Report + EIB (no xtt or etv)
                 </label>
               </div>
             </form>
@@ -522,6 +522,9 @@ export default function Home() {
           </div> */}
         </div>
       )}
+      <div style={{ textAlign: "center" }}>
+        <h5>Made by Ricardo Paulin</h5>
+      </div>
     </div>
   );
 }
