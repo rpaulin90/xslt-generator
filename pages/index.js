@@ -60,7 +60,7 @@ export default function Home() {
     var xml = "";
     var xmlBody = "";
 
-    if (type == "DT") {
+    if (type == "DT" || type == "CR_DT") {
       stringArray
         .filter((x) => x != "")
         .forEach(
@@ -95,7 +95,11 @@ export default function Home() {
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" ${
-      template == "ccw"
+      type == "CR_DT"
+        ? 'xmlns:wd="urn:com.workday.report/' +
+          (report_uri != "" ? report_uri : "YOUR_REPORT_NAME_HERE") +
+          '"'
+        : template == "ccw"
         ? 'xmlns:ws="urn:com.workday/workersync"'
         : 'xmlns:bc="urn:com.workday/bc"'
     }
@@ -117,7 +121,9 @@ export default function Home() {
         } 
         <!-- RECORDS -->
         <xsl:for-each select="${
-          template == "ccw"
+          type == "CR_DT"
+            ? "wd:Report_Data/wd:Report_Entry"
+            : template == "ccw"
             ? "ws:Worker_Sync/ws:Worker"
             : "bc:Benefits_Extract_Employees/bc:Employee"
         }">
@@ -267,12 +273,12 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>XSLT Starter File Generator</title>
+        <title>Workday XSLT Starter File Generator</title>
         <meta name="description" content="XSLT Generator" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <h2 className={styles.title}>XSLT Starter File Generator</h2>
+      <h2 className={styles.title}>Workday XSLT Starter File Generator</h2>
 
       <div style={{ marginTop: "20px" }}>
         <div
@@ -326,6 +332,17 @@ export default function Home() {
                     onChange={handleTypeChange}
                   />
                   Connector + Document Transformation
+                </label>
+              </div>
+              <div className="radio">
+                <label>
+                  <input
+                    type="radio"
+                    value="CR_DT"
+                    checked={type == "CR_DT"}
+                    onChange={handleTypeChange}
+                  />
+                  Custom Report + Document Transformation
                 </label>
               </div>
               <div className="radio">
@@ -410,7 +427,7 @@ export default function Home() {
             </form>
           </div>
         </div>
-        {type == "EIB" ? (
+        {type == "EIB" || type == "CR_DT" ? (
           <div>
             <h4>Report URI</h4>
             <form>
@@ -523,7 +540,18 @@ export default function Home() {
         </div>
       )}
       <div style={{ textAlign: "center" }}>
-        <h5>Made by Ricardo Paulin</h5>
+        <h5>
+          Made by{" "}
+          <a
+            style={{ borderBottom: "1px solid" }}
+            href="https://www.linkedin.com/in/rpaulin90/"
+            alt="Ricardo Paulin"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Ricardo Paulin
+          </a>
+        </h5>
       </div>
     </div>
   );
